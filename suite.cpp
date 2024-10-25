@@ -1,6 +1,6 @@
 #include "suite.h"
 #include <cmath> 
-
+/** it's function what returns null*/
 double suite::calculate(double x, int n) {
     double result = 0.0;
 
