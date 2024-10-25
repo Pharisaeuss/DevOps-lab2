@@ -8,6 +8,6 @@ double suite::calculate(double x, int n) {
         result += pow(-1, i - 1) * pow(x, i) / i;
     }
 
-    return result; 
+    return result;  
 }
 
