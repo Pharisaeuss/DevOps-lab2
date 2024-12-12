@@ -2,9 +2,9 @@ name: CI AutoPackage
 
 on:
   push:
-    branches: [branchPackage]
+    branches: [branchAutoPackage]
   pull_request:
-    branches: [branchPackage]
+    branches: [branchAutoPackage]
 
 jobs:
   build:
