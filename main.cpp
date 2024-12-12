@@ -4,7 +4,6 @@
 int main() {
     suite obj;
     double x;
-    int n;
 
     // Get user input
     std::cout << "Enter the value of x (for ln(1+x)): ";
