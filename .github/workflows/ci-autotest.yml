@@ -2,9 +2,9 @@ name: CI AutoMake
 
 on:
   push:
-    branches: [branchAutomake]
+    branches: [branchAutoTest]
   pull_request:
-    branches: [branchAutomake]
+    branches: [branchAutoTest]
 
 jobs:
   build:
@@ -16,7 +16,7 @@ jobs:
       - name: Install build dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y g++ automake autoconf
+          sudo apt-get install -y g++ automake autoconf libboost-test-dev
 
       - name: Auto generate configure script
         run: |
@@ -29,11 +29,17 @@ jobs:
       - name: Build with Makefile
         run: make
 
-      - name: Create distribution
-        run: make dist
+      - name: Testing for function
+        run: make check
 
-      - name: Upload artifact
+      - name: Upload unit test log1
         uses: actions/upload-artifact@v4
         with:
-          name: suite-dist
-          path: suite-*.tar.gz
+          name: unit-test
+          path: unit-test.log
+
+      - name: Upload unit test log2
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-suite
+          path: test-suite.log
