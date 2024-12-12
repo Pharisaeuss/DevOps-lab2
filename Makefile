@@ -171,7 +171,8 @@ am__define_uniq_tagged_files = \
     if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
   done | $(am__uniquify_input)`
 AM_RECURSIVE_TARGETS = cscope
-am__DIST_COMMON = $(srcdir)/Makefile.in depcomp install-sh missing
+am__DIST_COMMON = $(srcdir)/Makefile.in compile depcomp install-sh \
+	missing
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
 distdir = $(PACKAGE)-$(VERSION)
 top_distdir = $(distdir)
@@ -198,12 +199,15 @@ AUTOCONF = ${SHELL} '/home/vboxuser/lab2/DevOps-lab2/missing' autoconf
 AUTOHEADER = ${SHELL} '/home/vboxuser/lab2/DevOps-lab2/missing' autoheader
 AUTOMAKE = ${SHELL} '/home/vboxuser/lab2/DevOps-lab2/missing' automake-1.16
 AWK = mawk
+CC = gcc
+CCDEPMODE = depmode=gcc3
+CFLAGS = -g -O2
 CPPFLAGS = 
 CSCOPE = cscope
 CTAGS = ctags
 CXX = g++
 CXXDEPMODE = depmode=gcc3
-CXXFLAGS = -g -O2
+CXXFLAGS = -Wall -std=c++11
 CYGPATH_W = echo
 DEFS = -DPACKAGE_NAME=\"suite\" -DPACKAGE_TARNAME=\"suite\" -DPACKAGE_VERSION=\"0.1\" -DPACKAGE_STRING=\"suite\ 0.1\" -DPACKAGE_BUGREPORT=\"vasyanovich.liza@gmail.com\" -DPACKAGE_URL=\"\" -DPACKAGE=\"suite\" -DVERSION=\"0.1\"
 DEPDIR = .deps
@@ -240,6 +244,7 @@ abs_builddir = /home/vboxuser/lab2/DevOps-lab2
 abs_srcdir = /home/vboxuser/lab2/DevOps-lab2
 abs_top_builddir = /home/vboxuser/lab2/DevOps-lab2
 abs_top_srcdir = /home/vboxuser/lab2/DevOps-lab2
+ac_ct_CC = gcc
 ac_ct_CXX = g++
 am__include = include
 am__leading_dot = .

@@ -1,0 +1,10 @@
+Source: suite
+Section: math
+Priority: optional
+Maintainer: Pharisaeus <vasyanovich.liza@gmail.com>
+Build-Depends: debhelper-compat (= 12), autotools-dev
+
+Package: suite
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Program on C++ to calculate trigonometric function.

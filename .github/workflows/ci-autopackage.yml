@@ -1,10 +1,10 @@
-name: CI AutoMake
+name: CI AutoPackage
 
 on:
   push:
-    branches: [branchAutomake]
+    branches: [branchPackage]
   pull_request:
-    branches: [branchAutomake]
+    branches: [branchPackage]
 
 jobs:
   build:
@@ -16,7 +16,7 @@ jobs:
       - name: Install build dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y g++ automake autoconf
+          sudo apt-get install -y g++ automake autoconf debhelper devscripts
 
       - name: Auto generate configure script
         run: |
@@ -25,15 +25,18 @@ jobs:
       - name: Run configure script
         run: ./configure
       
+      - name: Auto Build Debiand Package
+        run: |
+          dpkg-buildpackage -us -uc
 
       - name: Build with Makefile
         run: make
 
-      - name: Create distribution
-        run: make dist
+  #    - name: Create distribution
+  #     run: make dist
 
-      - name: Upload artifact
+      - name: Upload Debian artifact
         uses: actions/upload-artifact@v4
         with:
-          name: suite-dist
-          path: suite-*.tar.gz
+          name: suite-deb
+          path: /home/runner/work/DevOps-lab2/suite_*.deb
