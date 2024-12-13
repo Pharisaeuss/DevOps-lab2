@@ -1,8 +1,18 @@
-FROM alpine
+FROM alpine AS build
 
-WORKDIR /home/SUITE
-COPY ./suite .
-RUN apk add libstdc++
-RUN apk add libc6-compat
+RUN apk add --no-cache build-base automake autoconf git
+RUN git clone --branch branchHTTPservMulti https://github.com/Pharisaeuss/DevOps-lab2.git /repo
 
-ENTRYPOINT ["./suite"]
+WORKDIR /repo
+COPY . .
+
+RUN aclocal
+RUN automake --add-missing
+RUN autoreconf --install
+RUN ./configure
+RUN make
+
+FROM alpine AS final-stage 
+COPY --from=build /repo/suite /usr/local/bin/suite
+
+ENTRYPOINT ["/usr/local/bin/suite"]
