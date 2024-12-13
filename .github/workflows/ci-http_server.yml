@@ -38,10 +38,10 @@ jobs:
         run: docker login -u ${{secrets.docker_username}} -p ${{secrets.docker_token}}
 
       - name: Imaged build for amd64
-        run: docker build --platform=linux/amd64 -t ${{secrets.docker_username}}/dev-ops_lab4:amd64 --push
+        run: docker build --platform=linux/amd64 -t ${{secrets.docker_username}}/dev-ops_lab4:amd64 --push .
 
       - name: Imaged build for arm64
-        run: docker build --platform=linux/arm64 -t ${{secrets.docker_username}}/dev-ops_lab4:arm64 --push
+        run: docker build --platform=linux/arm64 -t ${{secrets.docker_username}}/dev-ops_lab4:arm64 --push .
 
       - name: Create Docker manifest
         run: docker manifest create ${{secrets.docker_username}}/dev-ops_lab4 --amend ${{secrets.docker_username}}/dev-ops_lab4:amd64 --amend ${{secrets.docker_username}}/dev-ops_lab4:arm64
