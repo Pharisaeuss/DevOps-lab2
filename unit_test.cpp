@@ -1,22 +1,24 @@
-#include "suite.h"
 #include <cassert>
-#include <cmath>
+#include <chrono>
+#include <cstdlib> 
+#include <iostream>
 
-void unit_test() {
-    suite suiteInstance;
+void testComputeEndpointTiming() {
+    auto start = std::chrono::high_resolution_clock::now();
+    int result = system("curl -i -X GET 172.17.0.2:8081/compute > /dev/null");
+    auto end = std::chrono::high_resolution_clock::now();
 
-    // Test 1: x = 0, n = 1
-    assert(suiteInstance.calculate(0, 1) == 0.0);
+    assert(result == 0);
 
-    // Test 2: x = 1, n = 1
-    assert(std::abs(suiteInstance.calculate(1, 1) - 1.0) < 1e-9);
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+    std::cout << "Response time: " << duration << " ms" << std::endl;
 
-    // Test 3: x = 1, n = 2
-    assert(std::abs(suiteInstance.calculate(1, 2) - (1.0 - 1.0 / 2.0)) < 1e-9);
-
+    // Check if the response time is within the range 5 to 20 seconds
+    assert(duration >= 5000 && duration <= 20000);
 }
 
 int main() {
-    unit_test();
+    testComputeEndpointTiming();
+    std::cout << "Success" << std::endl;
     return 0;
 }

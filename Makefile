@@ -103,10 +103,12 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_suite_OBJECTS = main.$(OBJEXT) suite.$(OBJEXT)
+am_suite_OBJECTS = main.$(OBJEXT) suite.$(OBJEXT) \
+	HTTP_Server.$(OBJEXT)
 suite_OBJECTS = $(am_suite_OBJECTS)
 suite_LDADD = $(LDADD)
-am_unit_test_OBJECTS = unit_test.$(OBJEXT) suite.$(OBJEXT)
+am_unit_test_OBJECTS = unit_test.$(OBJEXT) suite.$(OBJEXT) \
+	HTTP_Server.$(OBJEXT)
 unit_test_OBJECTS = $(am_unit_test_OBJECTS)
 unit_test_LDADD = $(LDADD)
 AM_V_P = $(am__v_P_$(V))
@@ -124,8 +126,8 @@ am__v_at_1 =
 DEFAULT_INCLUDES = -I.
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__maybe_remake_depfiles = depfiles
-am__depfiles_remade = ./$(DEPDIR)/main.Po ./$(DEPDIR)/suite.Po \
-	./$(DEPDIR)/unit_test.Po
+am__depfiles_remade = ./$(DEPDIR)/HTTP_Server.Po ./$(DEPDIR)/main.Po \
+	./$(DEPDIR)/suite.Po ./$(DEPDIR)/unit_test.Po
 am__mv = mv -f
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
@@ -495,8 +497,8 @@ top_build_prefix =
 top_builddir = .
 top_srcdir = .
 AUTOMAKE_OPTIONS = foreign
-suite_SOURCES = main.cpp suite.cpp suite.h
-unit_test_SOURCES = unit_test.cpp suite.cpp suite.h
+suite_SOURCES = main.cpp suite.cpp suite.h HTTP_Server.cpp
+unit_test_SOURCES = unit_test.cpp suite.cpp suite.h HTTP_Server.cpp
 EXTRA_DIST = Makefile.am
 all: all-am
 
@@ -595,6 +597,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+include ./$(DEPDIR)/HTTP_Server.Po # am--include-marker
 include ./$(DEPDIR)/main.Po # am--include-marker
 include ./$(DEPDIR)/suite.Po # am--include-marker
 include ./$(DEPDIR)/unit_test.Po # am--include-marker
@@ -1061,7 +1064,8 @@ clean-am: clean-binPROGRAMS clean-checkPROGRAMS clean-generic \
 
 distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
-		-rm -f ./$(DEPDIR)/main.Po
+		-rm -f ./$(DEPDIR)/HTTP_Server.Po
+	-rm -f ./$(DEPDIR)/main.Po
 	-rm -f ./$(DEPDIR)/suite.Po
 	-rm -f ./$(DEPDIR)/unit_test.Po
 	-rm -f Makefile
@@ -1111,7 +1115,8 @@ installcheck-am:
 maintainer-clean: maintainer-clean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 	-rm -rf $(top_srcdir)/autom4te.cache
-		-rm -f ./$(DEPDIR)/main.Po
+		-rm -f ./$(DEPDIR)/HTTP_Server.Po
+	-rm -f ./$(DEPDIR)/main.Po
 	-rm -f ./$(DEPDIR)/suite.Po
 	-rm -f ./$(DEPDIR)/unit_test.Po
 	-rm -f Makefile
